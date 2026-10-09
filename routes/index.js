@@ -1,0 +1,51 @@
+
+  /*
+    MIT License
+
+    Copyright (c) 2025 Christian I. Cabrera || XianFire Framework
+    Mindoro State University - Philippines
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+    */
+
+import express from "express";
+import { homePage } from "../controllers/homeController.js";
+import { product } from "../controllers/product.js";
+import { insert, get, show, update, destroy } from "../controllers/bookController.js";
+
+const router = express.Router();
+
+// Pages
+router.get("/", homePage);
+
+// Product API (for Postman)
+// Product API (for Postman)
+router.get("/api/products", product.all);
+router.get("/api/products/:id", product.isa);
+router.post("/api/products", product.insert);
+router.put("/api/products/:id", product.update);
+router.delete("/api/products/:id", product.remove);
+// Book API
+router.post("/books", insert);
+router.get("/books", get);
+router.get("/books/:id", show);
+router.put("/books/:id", update);
+router.delete("/books/:id", destroy);
+
+export default router;
