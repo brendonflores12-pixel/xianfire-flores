@@ -60,3 +60,71 @@ export const destroy = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// ===== Activity 3: Views =====
+
+// SHOW TABLE - GET /library
+export const listPage = async (req, res) => {
+  try {
+    const books = await Book.findAll({ raw: true });
+    res.render("books/index", { books });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+// SHOW ADD FORM - GET /library/create
+export const createPage = (req, res) => {
+  res.render("books/create");
+};
+
+// SAVE NEW BOOK - POST /library
+export const store = async (req, res) => {
+  try {
+    await Book.create(req.body);
+    res.redirect("/library");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+// SHOW EDIT FORM - GET /library/:id
+export const editPage = async (req, res) => {
+  try {
+    const book = await Book.findByPk(req.params.id, { raw: true });
+    if (!book) {
+      return res.status(404).send("Book not found");
+    }
+    res.render("books/edit", { book });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+// SAVE EDIT - POST /library/:id
+export const saveEdit = async (req, res) => {
+  try {
+    const book = await Book.findByPk(req.params.id);
+    if (!book) {
+      return res.status(404).send("Book not found");
+    }
+    await book.update(req.body);
+    res.redirect("/library");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+// DELETE - POST /library/:id/delete
+export const remove = async (req, res) => {
+  try {
+    const book = await Book.findByPk(req.params.id);
+    if (!book) {
+      return res.status(404).send("Book not found");
+    }
+    await book.destroy();
+    res.redirect("/library");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};

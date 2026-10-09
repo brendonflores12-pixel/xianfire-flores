@@ -1,5 +1,4 @@
-
-  /*
+/*
     MIT License
 
     Copyright (c) 2025 Christian I. Cabrera || XianFire Framework
@@ -27,7 +26,20 @@
 import express from "express";
 import { homePage } from "../controllers/homeController.js";
 import { product } from "../controllers/product.js";
-import { insert, get, show, update, destroy } from "../controllers/bookController.js";
+//import { insert, get, show, update, destroy } from "../controllers/bookController.js";
+import {
+  insert,
+  get,
+  show,
+  update,
+  destroy,
+  listPage,
+  createPage,
+  store,
+  editPage,
+  saveEdit,
+  remove,
+} from "../controllers/bookController.js";
 
 const router = express.Router();
 
@@ -47,5 +59,13 @@ router.get("/books", get);
 router.get("/books/:id", show);
 router.put("/books/:id", update);
 router.delete("/books/:id", destroy);
+
+// Book Views (Activity 3)
+router.get("/library", listPage);
+router.get("/library/create", createPage);
+router.post("/library", store);
+router.get("/library/:id", editPage);
+router.post("/library/:id", saveEdit);
+router.post("/library/:id/delete", remove);
 
 export default router;

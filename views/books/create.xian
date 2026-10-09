@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Book</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input { display: block; margin: 8px 0; padding: 6px; width: 250px; }
+  </style>
+</head>
+<body>
+  <h1>Add Book</h1>
+
+  <form method="POST" action="/library">
+    <input type="text" name="title" placeholder="Title" required>
+    <input type="text" name="author" placeholder="Author" required>
+    <input type="text" name="genre" placeholder="Genre" required>
+    <input type="number" name="year" placeholder="Year" required>
+    <input type="number" step="0.01" name="price" placeholder="Price" required>
+    <input type="submit" value="Save">
+  </form>
+
+  <a href="/library">Back to list</a>
+</body>
+</html>
